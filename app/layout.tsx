@@ -26,7 +26,7 @@ export default function RootLayout({
         className={`antialiased ${manrope.className} w-full flex items-center justify-center h-screen bg-[#f4f4f4]`}
       >
         <ThemeProvider>
-          <div className="bg-[#ffffff] dark:bg-[#1a1a1a] transition-all max-w-[25rem] w-full max-h-[38rem] h-full 1xl:max-h-full 1xl:max-w-full relative">
+          <div className="bg-[#ffffff] dark:bg-[#080808] transition-all max-w-[25rem] w-full max-h-[38rem] h-full 1xl:max-h-full 1xl:max-w-full relative">
             <Header />
             <main>{children}</main>
             <Footer />
