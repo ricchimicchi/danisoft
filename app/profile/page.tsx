@@ -1,8 +1,11 @@
 import React from 'react'
+import DarkToggle from '../ui/darktoggle'
 
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div>
+        <DarkToggle />
+    </div>
   )
 }
 

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "./providers/ThemeProvider";
-import Header from "./ui/header";
 import Footer from "./ui/footer";
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,14 +20,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body
         className={`antialiased ${manrope.className} w-full flex items-center justify-center h-screen bg-[#f4f4f4]`}
       >
         <ThemeProvider>
-          <div className="bg-[#ffffff] dark:bg-[#080808] transition-all max-w-[25rem] w-full max-h-[38rem] h-full 1xl:max-h-full 1xl:max-w-full relative">
-            <Header />
+          <div className="bg-[#ffffff] dark:bg-[#080808] transition-all max-w-[25rem] w-full max-h-[38rem] h-full 1xl:max-h-full 1xl:max-w-full relative overflow-hidden">
             <main>{children}</main>
             <Footer />
           </div>

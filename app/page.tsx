@@ -1,6 +1,9 @@
-import HomeSignIn from "./ui/homesignin";
+import React from 'react'
 
-
-export default function Home() {
-  return <HomeSignIn />
+const Page = () => {
+  return (
+    <div>Page</div>
+  )
 }
+
+export default Page
