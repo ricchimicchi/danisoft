@@ -1,7 +1,13 @@
 import Image from "next/image"
 import DarkToggle from "./darktoggle"
 import CryptoAnimation from "./signanimation"
+import { Space_Grotesk } from "next/font/google"
 
+
+const space = Space_Grotesk({
+    weight: ["300", "400", "500", "600", "700"],
+    subsets: ["latin"],
+  });
 
 const Signpage = () => {
   return (
@@ -11,7 +17,11 @@ const Signpage = () => {
             <DarkToggle />
         </div>
 
-        <div className="absolute top-32 inset-x-0">
+        <div className="absolute top-32 inset-x-0 flex flex-col items-center justify-center gap-6">
+            <div className="flex justify-center gap-1">
+                <h1 className={`${space.className} text-xl font-bold uppercase`}>Dani Soft</h1>
+                <span className={`text-[8px] ${space.className} font-medium mt-2.5 block`}>(v2.0)</span>
+            </div>
             <CryptoAnimation />
         </div>
     </div>

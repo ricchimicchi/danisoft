@@ -2,6 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Space_Grotesk } from "next/font/google"
+
+
+const space = Space_Grotesk({
+    weight: ["300", "400", "500", "600", "700"],
+    subsets: ["latin"],
+  });
 
 const cryptoIcons = [
   { id: 'btc', address: '3FZbgi29cpjq2GjdwV***HuJJnkLtktZc5' },
@@ -29,12 +36,12 @@ const CryptoAnimation = () => {
         {cryptoIcons.map((icon, index) => (
           <motion.div
             key={icon.id}
-            className="absolute flex items-center justify-center p-1 py-2 backdrop-blur-2xl bg-black/[0.06] w-36 rounded-lg"
+            className="absolute flex items-center justify-center p-1 py-2 backdrop-blur-2xl bg-black/[0.06] w-64 rounded-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: index === currentIndex ? 1 : 0 }}
             transition={{ duration: .5, ease: "easeInOut" }}
           >
-            <span className="text-sm font-medium">{icon.address.slice(0, 12)}...</span>
+            <span className={`${space.className} text-sm font-medium`}>{icon.address.slice(0, 24)}...</span>
           </motion.div>
         ))}
       </div>
