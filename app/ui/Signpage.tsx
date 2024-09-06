@@ -17,7 +17,7 @@ const Signpage = () => {
             <DarkToggle />
         </div>
 
-        <div className="absolute top-32 inset-x-0 flex flex-col items-center justify-center gap-6">
+        <div className="absolute top-24 inset-x-0 flex flex-col items-center justify-center gap-6">
             <div className="flex justify-center gap-1">
                 <h1 className={`${space.className} text-xl font-bold uppercase`}>Dani Soft</h1>
                 <span className={`text-[8px] ${space.className} font-medium mt-2.5 block`}>(v2.0)</span>
