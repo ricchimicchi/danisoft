@@ -29,7 +29,7 @@ const CryptoAnimation = () => {
         {cryptoIcons.map((icon, index) => (
           <motion.div
             key={icon.id}
-            className="absolute flex items-center justify-center p-1 backdrop-blur-2xl bg-black/[0.06] w-36 rounded-lg"
+            className="absolute flex items-center justify-center p-1 py-2 backdrop-blur-2xl bg-black/[0.06] w-36 rounded-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: index === currentIndex ? 1 : 0 }}
             transition={{ duration: .5, ease: "easeInOut" }}
