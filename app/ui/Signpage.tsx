@@ -51,10 +51,10 @@ const Signpage: React.FC = () => {
         </div>
         <CryptoAnimation />
       </div>
-      <div className="absolute inset-x-0 top-64 px-4">
-        <div>
-            <h3 className={`text-2xl font-bold tracking-tight `}>Log in</h3>
-            <p className="text-[#7c7c7c] font-medium">Enter the activation key</p>
+      <div className="absolute inset-x-0 top-52 px-4">
+        <div className="text-center">
+            <h3 className={`text-2xl font-bold tracking-tight `}>Sign in</h3>
+            <p className="text-[#7c7c7c]">Enter the activation key</p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -64,10 +64,10 @@ const Signpage: React.FC = () => {
             type="text"
             placeholder="Key"
             {...register("textInput", { required: "Please enter Key" })}
-            className={`p-2 px-3 dark:placeholder:text-white/50 placeholder:text-sm font-medium tracking-wide ${space.className} outline-black/5 outline-1 transition-all dark:outline-none dark:text-white border-[1px] dark:border-white/5 dark:bg-white/[0.01] bg-black/[0.03] backdrop-blur w-full rounded-lg`}
+            className={`p-2 px-3 text-center dark:placeholder:text-white/50 placeholder:text-sm font-medium tracking-wide ${space.className} outline-black/5 outline-1 transition-all dark:outline-none dark:text-white border-[1px] dark:border-white/5 dark:bg-white/[0.01] bg-black/[0.03] backdrop-blur w-full rounded-lg`}
           />
           {errors.textInput && (
-            <p className="text-red-500 text-xs font-medium -mt-1.5 mx-0.5">{errors.textInput.message}</p>
+            <p className="text-red-500 text-xs text-center font-medium -mt-1.5 mx-0.5">{errors.textInput.message}</p>
           )}
 
           <button
