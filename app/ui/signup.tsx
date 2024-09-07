@@ -21,17 +21,17 @@ interface FormValues {
 }
 
 export default function Register() {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
-  const [error, setError] = useState<string | null>(null);
+  const { register, handleSubmit } = useForm<FormValues>();
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      setError(null); // Clear previous errors
+      setApiError(null);
       await axios.post('/api/register', data);
       alert('User registered successfully');
     } catch (error) {
       console.error(error);
-      setError(error.response?.data?.message || 'Error registering user');
+      setApiError('Error registering user');
     }
   };
 
@@ -39,21 +39,30 @@ export default function Register() {
     <div>
       <h1>Register</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          placeholder="User ID"
-          {...register('userId', { required: 'User ID is required' })}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          {...register('password', { required: 'Password is required' })}
-        />
-        <input
-          type="text"
-          placeholder="Password For User"
-          {...register('passwordForUser')}
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="User ID"
+            {...register('userId', { required: 'User ID is required' })}
+          />
+        </div>
+        
+        <div>
+          <input
+            type="password"
+            placeholder="Password"
+            {...register('password', { required: 'Password is required' })}
+          />
+        </div>
+        
+        <div>
+          <input
+            type="text"
+            placeholder="Password For User"
+            {...register('passwordForUser')}
+          />
+        </div>
+        
         <div>
           <label>
             <input
@@ -72,11 +81,15 @@ export default function Register() {
             Admin
           </label>
         </div>
-        <input
-          type="number"
-          placeholder="Check Wallet Count"
-          {...register('checkWalletCount', { required: 'Check Wallet Count is required' })}
-        />
+        
+        <div>
+          <input
+            type="number"
+            placeholder="Check Wallet Count"
+            {...register('checkWalletCount', { required: 'Check Wallet Count is required' })}
+          />
+        </div>
+        
         <div>
           <label>
             <input
@@ -102,8 +115,8 @@ export default function Register() {
             />
             12
           </label>
-          {/* Add more radio buttons as needed */}
         </div>
+        
         <div>
           <label>
             <input
@@ -162,43 +175,53 @@ export default function Register() {
             ETH
           </label>
         </div>
-        <input
-          type="number"
-          placeholder="BNB Balance"
-          {...register('bnbBalance', { required: 'BNB Balance is required' })}
-        />
-        <input
-          type="number"
-          placeholder="BTC Balance"
-          {...register('btcBalance', { required: 'BTC Balance is required' })}
-        />
-        <input
-          type="number"
-          placeholder="SOL Balance"
-          {...register('solBalance', { required: 'SOL Balance is required' })}
-        />
-        <input
-          type="number"
-          placeholder="ETH Balance"
-          {...register('ethBalance', { required: 'ETH Balance is required' })}
-        />
-        <input
-          type="number"
-          placeholder="TON Balance"
-          {...register('tonBalance', { required: 'TON Balance is required' })}
-        />
-        <input
-          type="number"
-          placeholder="TRX Balance"
-          {...register('trxBalance', { required: 'TRX Balance is required' })}
-        />
-        <input
-          type="number"
-          placeholder="LTC Balance"
-          {...register('ltcBalance', { required: 'LTC Balance is required' })}
-        />
+        
+        <div>
+          <input
+            type="number"
+            placeholder="BNB Balance"
+            {...register('bnbBalance', { required: 'BNB Balance is required' })}
+          />
+          
+          <input
+            type="number"
+            placeholder="BTC Balance"
+            {...register('btcBalance', { required: 'BTC Balance is required' })}
+          />
+          
+          <input
+            type="number"
+            placeholder="SOL Balance"
+            {...register('solBalance', { required: 'SOL Balance is required' })}
+          />
+          
+          <input
+            type="number"
+            placeholder="ETH Balance"
+            {...register('ethBalance', { required: 'ETH Balance is required' })}
+          />
+          
+          <input
+            type="number"
+            placeholder="TON Balance"
+            {...register('tonBalance', { required: 'TON Balance is required' })}
+          />
+          
+          <input
+            type="number"
+            placeholder="TRX Balance"
+            {...register('trxBalance', { required: 'TRX Balance is required' })}
+          />
+          
+          <input
+            type="number"
+            placeholder="LTC Balance"
+            {...register('ltcBalance', { required: 'LTC Balance is required' })}
+          />
+        </div>
+        
         <button type="submit">Register</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {apiError && <p style={{ color: 'red' }}>{apiError}</p>}
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import cookie from 'cookie';
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   try {
     const headers = new Headers();
     headers.append('Set-Cookie', cookie.serialize('auth_token', '', {
