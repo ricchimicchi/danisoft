@@ -1,6 +1,6 @@
 'use client';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
-import axios from 'axios';
 import { useState } from 'react';
 
 interface FormValues {
@@ -25,9 +25,22 @@ export default function Register() {
   const [apiError, setApiError] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    console.log(data);
     try {
       setApiError(null);
-      await axios.post('/api/register', data);
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error registering user');
+      }
+
       alert('User registered successfully');
     } catch (error) {
       console.error(error);

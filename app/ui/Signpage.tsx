@@ -6,7 +6,6 @@ import DarkToggle from "./darktoggle";
 import CryptoAnimation from "./signanimation";
 import { Space_Grotesk } from "next/font/google";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 
 const space = Space_Grotesk({
   weight: ["300", "400", "500", "600", "700"],
@@ -23,16 +22,23 @@ const Signpage: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      // Şifreyi doğru şekilde gönderdiğinizden emin olun
-      const response = await axios.post('/api/login', { password: data.keyInput });
-      if (response.status === 200) {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: data.keyInput }),
+      });
+
+      if (response.ok) {
         alert('Giriş başarılı');
-        router.push('/user'); // Yönlendirme yap
+        router.push('/user'); 
       } else {
-        alert('Giriş başarısız');
+        const errorData = await response.json();
+        alert(`Giriş başarısız: ${errorData.message || 'Unknown error'}`);
       }
     } catch (error) {
-      console.error('Giriş hatası:', error.response?.data?.message || error.message);
+      console.error('Giriş hatası:', error);
       alert('Giriş hatası');
     }
   };
