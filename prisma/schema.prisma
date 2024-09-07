@@ -8,49 +8,23 @@ datasource db {
 }
 
 model User {
-  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
-  key                String   @unique
-  blockchainSelected String[]
-  userTime           DateTime @default(now())
-  createdTime        DateTime @default(now())
-  isActive           Boolean  @default(true)
-  role               Role     @default(user)
-  btc_balance        Float    @default(0)
-  eth_balance        Float    @default(0)
-  bnb_balance        Float    @default(0)
-  sol_balance        Float    @default(0)
-  ltc_balance        Float    @default(0)
-  ton_balance        Float    @default(0)
-  tron_balance       Float    @default(0)
-}
-
-model AdminUserCreate {
-  id                 String        @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String        @db.ObjectId
-  key                String        @unique
-  blockchainSelected String[]
-  userTime           Int
-  role               Role          @default(user)
-  isActive           Boolean       @default(true)
-  AdminSystem        AdminSystem[]
-}
-
-model AdminSystem {
-  id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  adminId          String   @db.ObjectId
-  btc_balance      Float    @default(0)
-  eth_balance      Float    @default(0)
-  bnb_balance      Float    @default(0)
-  sol_balance      Float    @default(0)
-  ltc_balance      Float    @default(0)
-  ton_balance      Float    @default(0)
-  tron_balance     Float    @default(0)
-  countInput       Int      @default(0) 
-  moneyFount       Float    @default(0) 
-  selectedCryptos  String[] 
-  randomFreezeCode String[]
-
-  admin AdminUserCreate @relation(fields: [adminId], references: [id])
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String   @unique
+  password          String
+  passwordForUser   String
+  role              Role     @default(user)
+  createdAt         DateTime @default(now())
+  checkWalletCount  Int      @default(0)
+  userSystemTime    Int      @default(0)
+  blockchainSelected String[] @default([])
+  userSystemActive  Boolean  @default(true)
+  bnbBalance        Float    @default(0.0000)
+  btcBalance        Float    @default(0.0000)
+  solBalance        Float    @default(0.0000)
+  ethBalance        Float    @default(0.0000)
+  tonBalance        Float    @default(0.0000)
+  trxBalance        Float    @default(0.0000)
+  ltcBalance        Float    @default(0.0000)
 }
 
 enum Role {

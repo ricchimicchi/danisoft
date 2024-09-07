@@ -5,6 +5,8 @@ import Image from "next/image";
 import DarkToggle from "./darktoggle";
 import CryptoAnimation from "./signanimation";
 import { Space_Grotesk } from "next/font/google";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const space = Space_Grotesk({
   weight: ["300", "400", "500", "600", "700"],
@@ -12,17 +14,27 @@ const space = Space_Grotesk({
 });
 
 interface FormValues {
-  textInput: string;
+  keyInput: string; 
 }
 
 const Signpage: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      // Şifreyi doğru şekilde gönderdiğinizden emin olun
+      const response = await axios.post('/api/login', { password: data.keyInput });
+      if (response.status === 200) {
+        alert('Giriş başarılı');
+        router.push('/user'); // Yönlendirme yap
+      } else {
+        alert('Giriş başarısız');
+      }
+    } catch (error) {
+      console.error('Giriş hatası:', error.response?.data?.message || error.message);
+      alert('Giriş hatası');
+    }
   };
 
   return (
@@ -54,7 +66,7 @@ const Signpage: React.FC = () => {
       <div className={`absolute inset-x-0 top-52 px-4 ${space.className}`}>
         <div className="text-center">
             <h3 className={`text-2xl font-bold tracking-tight `}>Sign in</h3>
-            <p className="text-[#7c7c7c]">Enter the activation key</p>
+            <p className="text-[#7c7c7c]">Enter your credentials</p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -62,12 +74,14 @@ const Signpage: React.FC = () => {
         >
           <input
             type="text"
-            placeholder="Key"
-            {...register("textInput", { required: "Please enter Key" })}
+            placeholder="Activation Key"
+            {...register("keyInput", { required: "Please enter your activation key" })}
             className={`p-2 px-3 text-center dark:placeholder:text-white/50 placeholder:text-sm font-medium tracking-wide ${space.className} outline-black/5 outline-1 transition-all dark:outline-none dark:text-white border-[1px] dark:border-white/5 dark:bg-white/[0.01] bg-black/[0.03] backdrop-blur w-full rounded-lg`}
           />
-          {errors.textInput && (
-            <p className="text-red-500 text-xs text-center font-medium -mt-1.5 mx-0.5">{errors.textInput.message}</p>
+          {errors.keyInput && (
+            <p className="text-red-500 text-xs text-center font-medium -mt-1.5 mx-0.5">
+              {errors.keyInput.message}
+            </p>
           )}
 
           <button
