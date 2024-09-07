@@ -15,10 +15,12 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('/api/user', {
+        const response = await fetch(`${BASE_URL}/api/user`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -40,11 +42,12 @@ const ProfilePage = () => {
     };
 
     fetchUserData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const handleSignOut = async () => {
     try {
-      await fetch('/api/signout', {
+      await fetch(`${BASE_URL}/api/signout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

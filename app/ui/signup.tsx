@@ -24,11 +24,14 @@ export default function Register() {
   const { register, handleSubmit } = useForm<FormValues>();
   const [apiError, setApiError] = useState<string | null>(null);
 
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     console.log(data);
     try {
       setApiError(null);
-      const response = await fetch('/api/register', {
+      const response = await fetch(`${BASE_URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

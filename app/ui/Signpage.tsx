@@ -20,9 +20,11 @@ const Signpage: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
   const router = useRouter();
 
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch(`${BASE_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
